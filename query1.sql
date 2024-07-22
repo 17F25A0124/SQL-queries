@@ -9,6 +9,7 @@
 - For brands that do not have pairs in the same year : keep those rows as well
 */
 
+-- create table
 
 CREATE TABLE brands 
 (
@@ -20,6 +21,9 @@ CREATE TABLE brands
     custom3     INT,
     custom4     INT
 );
+
+-- inserting values
+
 INSERT INTO brands VALUES ('apple', 'samsung', 2020, 1, 2, 1, 2);
 INSERT INTO brands VALUES ('samsung', 'apple', 2020, 1, 2, 1, 2);
 INSERT INTO brands VALUES ('apple', 'samsung', 2021, 1, 2, 5, 3);
@@ -27,7 +31,12 @@ INSERT INTO brands VALUES ('samsung', 'apple', 2021, 5, 3, 1, 2);
 INSERT INTO brands VALUES ('google', NULL, 2020, 5, 9, NULL, NULL);
 INSERT INTO brands VALUES ('oneplus', 'nothing', 2020, 5, 9, 6, 3);
 
-SELECT * FROM brands;with cte as
+
+SELECT * FROM brands;
+
+-- solution
+
+with cte as
             (select *
             , case when brand1 < brand2 
                               then concat(brand1,brand2,year)
@@ -42,3 +51,7 @@ select brand1,brand2,year,custom1,custom2,custom3,custom4
 from cte_rn
 where rn=1
 or (custom1<>custom3 and custom2<>custom4);
+
+
+
+
